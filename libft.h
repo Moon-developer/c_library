@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 11:47:35 by mafernan          #+#    #+#             */
-/*   Updated: 2017/09/10 12:53:50 by mafernan         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:38:16 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@
 # define BLUE		"\x1b[34m"
 # define MAGENTA	"\x1b[35m"
 # define CYAN		"\x1b[36(;1)(;5)m"
-# define CYAN1		"\x1b[36(;1)m"
+# define CYAN1		"\x1b[36m"
 # define RESET		"\x1b[0m"
+# define HL_W		"\x1b[37(;7)m"
 
 typedef struct		s_list
 {
@@ -64,6 +65,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
 
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
+char				*ft_strupr(char *str);
 void				ft_putnbrnl(int n);
 void				ft_cmd_unknown(char *cmd);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -90,11 +92,14 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_delarray(char **array);
+void				ft_print_arr(char **a);
+
 char const			*ft_getenv(t_sub key);
 char				**ft_arrtrim(char **arr);
 char				*ft_addequal(char *s);
 char				*ft_strndup(const char *s, size_t n);
 char				*ft_strdup(const char *s1);
+char				*ft_strdup_notab(char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strcat(char *s1, const char *s2);
@@ -119,6 +124,7 @@ char				**ft_sstrnew(size_t size);
 char				**ft_arraydup(char **env);
 char				**ft_arraysdup(char **src);
 char				**ft_arraysdupone(char **src, char *str);
+char				**ft_add_to_array(char **arr, char *str);
 
 int					get_next_line(const int fd, char **line);
 int					ft_abs(int num);
@@ -148,5 +154,6 @@ size_t				ft_strnlen(const char *str, size_t max);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlenchr(const char *s, char c);
 size_t				ft_arraylen(char **array);
+int					ft_isalnumstr(char *s);
 
 #endif
